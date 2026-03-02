@@ -28,6 +28,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.material)
     implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.google.maps)
     implementation(libs.dagger)
     ksp(libs.dagger.compiler)
     implementation(project(":core:di"))
