@@ -3,6 +3,18 @@ plugins {
     alias(libs.plugins.ksp)
 }
 
+// Read Google Maps API key from local.properties — never commit the actual key.
+// Add this line to your local.properties: GOOGLE_MAPS_API_KEY=your_key_here
+val googleMapsApiKey: String = run {
+    val file = rootProject.file("local.properties")
+    if (!file.exists()) return@run ""
+    file.readLines()
+        .firstOrNull { it.startsWith("GOOGLE_MAPS_API_KEY=") }
+        ?.substringAfter("=")
+        ?.trim()
+        ?: ""
+}
+
 android {
     namespace = "com.dashkin.netseeker"
     compileSdk {
@@ -19,6 +31,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        manifestPlaceholders["GOOGLE_MAPS_API_KEY"] = googleMapsApiKey
     }
 
     buildTypes {
