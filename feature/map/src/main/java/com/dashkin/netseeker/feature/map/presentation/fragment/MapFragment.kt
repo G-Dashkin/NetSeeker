@@ -19,6 +19,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.coroutines.launch
 
@@ -29,6 +30,8 @@ class MapFragment : BaseFragment(R.layout.fragment_map) {
 
     private val viewModel: MapViewModel by viewModels()
     private var googleMap: GoogleMap? = null
+
+    private val currentMarkers = mutableMapOf<String, Marker>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -71,35 +74,48 @@ class MapFragment : BaseFragment(R.layout.fragment_map) {
         }
     }
 
+    // Incrementally syncs map markers with [spots]:
+    // - removes markers whose spots are no longer in the list
+    // - adds markers for newly appeared spots
+    // Avoids [GoogleMap.clear] + full re-add on every filter change,
+    // which would cause flicker and poor performance with large datasets.
     private fun updateMarkers(spots: List<WifiSpot>) {
         val map = googleMap ?: return
-        map.clear()
+        val incomingIds = spots.associateBy { it.id }
+
+        // Remove markers that are no longer in the filtered list.
+        val removedIds = currentMarkers.keys.filter { it !in incomingIds }
+        removedIds.forEach { id ->
+            currentMarkers.remove(id)?.remove()
+        }
+
+        // Add markers for spots not yet on the map.
         spots.forEach { spot ->
-            val snippet = spot.downloadMbps
-                ?.let { "%.1f Mbps".format(it) }
-                ?: "No speed data"
-            map.addMarker(
-                MarkerOptions()
-                    .position(LatLng(spot.latitude, spot.longitude))
-                    .title(spot.ssid)
-                    .snippet(snippet)
-                    .icon(BitmapDescriptorFactory.defaultMarker(spot.quality.toMarkerHue()))
-            )
+            if (spot.id !in currentMarkers) {
+                val snippet = spot.downloadMbps
+                    ?.let { "%.1f Mbps".format(it) }
+                    ?: "No speed data"
+                val marker = map.addMarker(
+                    MarkerOptions()
+                        .position(LatLng(spot.latitude, spot.longitude))
+                        .title(spot.ssid)
+                        .snippet(snippet)
+                        .icon(BitmapDescriptorFactory.defaultMarker(spot.quality.toMarkerHue()))
+                )
+                if (marker != null) currentMarkers[spot.id] = marker
+            }
         }
     }
 
     private fun setupFilterChips() {
-        binding.chipAll.setOnCheckedChangeListener { _, checked ->
-            if (checked) viewModel.setFilter(SpotFilter.ALL)
-        }
-        binding.chipFast.setOnCheckedChangeListener { _, checked ->
-            if (checked) viewModel.setFilter(SpotFilter.FAST)
-        }
-        binding.chipModerate.setOnCheckedChangeListener { _, checked ->
-            if (checked) viewModel.setFilter(SpotFilter.MODERATE)
-        }
-        binding.chipSlow.setOnCheckedChangeListener { _, checked ->
-            if (checked) viewModel.setFilter(SpotFilter.SLOW)
+        binding.chipGroupFilter.setOnCheckedStateChangeListener { _, checkedIds ->
+            val filter = when (checkedIds.firstOrNull()) {
+                R.id.chipFast -> SpotFilter.FAST
+                R.id.chipModerate -> SpotFilter.MODERATE
+                R.id.chipSlow -> SpotFilter.SLOW
+                else -> SpotFilter.ALL
+            }
+            viewModel.setFilter(filter)
         }
     }
 
@@ -115,6 +131,7 @@ class MapFragment : BaseFragment(R.layout.fragment_map) {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        currentMarkers.clear()
         googleMap = null
         _binding = null
     }
