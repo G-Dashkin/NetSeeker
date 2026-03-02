@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mapFragment">
+
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.dashkin.netseeker.feature.map.presentation.fragment.MapFragment"
+        android:label="@string/nav_map">
+
+        <action
+            android:id="@+id/action_map_to_wifiDetail"
+            app:destination="@id/wifiDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nearbyFragment"
+        android:name="com.dashkin.netseeker.feature.nearby.presentation.fragment.NearbyFragment"
+        android:label="@string/nav_nearby">
+
+        <action
+            android:id="@+id/action_nearby_to_wifiDetail"
+            app:destination="@id/wifiDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/speedTestFragment"
+        android:name="com.dashkin.netseeker.feature.speedtest.presentation.fragment.SpeedTestFragment"
+        android:label="@string/nav_speedtest" />
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.dashkin.netseeker.feature.settings.presentation.fragment.SettingsFragment"
+        android:label="@string/nav_settings" />
+
+    <fragment
+        android:id="@+id/wifiDetailFragment"
+        android:name="com.dashkin.netseeker.feature.wifidetail.presentation.fragment.WifiDetailFragment"
+        android:label="@string/screen_wifi_detail" />
+
+</navigation>

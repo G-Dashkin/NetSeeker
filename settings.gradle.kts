@@ -23,4 +23,17 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "NetSeeker"
+
 include(":app")
+include(":core:di")
+include(":core:ui")
+include(":core:utils")
+include(":core:network")
+include(":core:wifi")
+include(":core:speedtest")
+include(":database")
+include(":feature:map")
+include(":feature:nearby")
+include(":feature:speedtest")
+include(":feature:wifidetail")
+include(":feature:settings")

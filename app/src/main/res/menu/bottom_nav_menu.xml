@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/mapFragment"
+        android:icon="@drawable/ic_nav_map"
+        android:title="@string/nav_map" />
+
+    <item
+        android:id="@+id/nearbyFragment"
+        android:icon="@drawable/ic_nav_nearby"
+        android:title="@string/nav_nearby" />
+
+    <item
+        android:id="@+id/speedTestFragment"
+        android:icon="@drawable/ic_nav_speedtest"
+        android:title="@string/nav_speedtest" />
+
+    <item
+        android:id="@+id/settingsFragment"
+        android:icon="@drawable/ic_nav_settings"
+        android:title="@string/nav_settings" />
+
+</menu>

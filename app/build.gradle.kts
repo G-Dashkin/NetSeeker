@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -29,9 +30,15 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+    }
+
+    buildFeatures {
+        viewBinding = true
+        buildConfig = true
     }
 }
 
@@ -41,6 +48,35 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.fragment.ktx)
+
+    // Navigation
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
+
+    // Dagger
+    implementation(libs.dagger)
+    ksp(libs.dagger.compiler)
+
+    // Coroutines
+    implementation(libs.kotlinx.coroutines.android)
+
+    // Feature modules
+    implementation(project(":feature:map"))
+    implementation(project(":feature:nearby"))
+    implementation(project(":feature:speedtest"))
+    implementation(project(":feature:wifidetail"))
+    implementation(project(":feature:settings"))
+
+    // Core modules
+    implementation(project(":core:di"))
+    implementation(project(":core:ui"))
+    implementation(project(":core:utils"))
+    implementation(project(":core:network"))
+    implementation(project(":core:wifi"))
+    implementation(project(":core:speedtest"))
+    implementation(project(":database"))
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
