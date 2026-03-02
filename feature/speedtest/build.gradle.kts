@@ -34,5 +34,6 @@ dependencies {
     implementation(project(":core:ui"))
     implementation(project(":core:utils"))
     implementation(project(":core:speedtest"))
+    implementation(project(":core:wifi"))
     implementation(project(":database"))
 }

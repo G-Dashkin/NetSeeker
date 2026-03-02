@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="speedtest_btn_start">Start Test</string>
+    <string name="speedtest_btn_cancel">Cancel</string>
+    <string name="speedtest_label_download">Download</string>
+    <string name="speedtest_label_upload">Upload</string>
+    <string name="speedtest_label_ping">Ping</string>
+    <string name="speedtest_unit_mbps">Mbps</string>
+    <string name="speedtest_unit_ms">ms</string>
+    <string name="speedtest_wifi_connected">Connected to %1$s</string>
+    <string name="speedtest_wifi_band_speed">%1$s · %2$d Mbps link</string>
+    <string name="speedtest_wifi_disconnected">Not connected to WiFi</string>
+    <string name="speedtest_wifi_connect_hint">Connect to WiFi to run a speed test</string>
+    <string name="speedtest_phase_ready">Ready to test</string>
+    <string name="speedtest_phase_no_wifi">Connect to WiFi first</string>
+    <string name="speedtest_phase_pinging">Measuring ping…</string>
+    <string name="speedtest_phase_downloading">Downloading… %1$d%%</string>
+    <string name="speedtest_phase_uploading">Uploading… %1$d%%</string>
+    <string name="speedtest_phase_completed">Test complete</string>
+    <string name="speedtest_phase_error">Test failed</string>
+</resources>
