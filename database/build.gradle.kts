@@ -23,4 +23,6 @@ dependencies {
     implementation(libs.room.ktx)
     ksp(libs.room.compiler)
     implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.dagger)
+    ksp(libs.dagger.compiler)
 }
