@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="speed_fast">#4CAF50</color>
+    <color name="speed_moderate">#FFC107</color>
+    <color name="speed_slow">#F44336</color>
+</resources>

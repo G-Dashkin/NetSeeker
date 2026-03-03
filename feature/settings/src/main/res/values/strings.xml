@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Section headers -->
+    <string name="settings_speed_thresholds">Speed Thresholds</string>
+    <string name="settings_nearby_search">Nearby Search</string>
+    <string name="settings_display">Display</string>
+
+    <!-- Threshold sliders -->
+    <string name="settings_fast_threshold_label">Fast threshold (green)</string>
+    <string name="settings_slow_threshold_label">Slow threshold (red)</string>
+    <string name="settings_search_radius_label">Search radius</string>
+    <string name="settings_speed_unit_label">Speed units</string>
+
+    <!-- Dynamic value labels -->
+    <string name="settings_mbps_value">%d Mbps</string>
+    <string name="settings_radius_value">%d m</string>
+
+    <!-- Slider range hints -->
+    <string name="settings_slider_min_20">20 Mbps</string>
+    <string name="settings_slider_max_200">200 Mbps</string>
+    <string name="settings_slider_min_1">1 Mbps</string>
+    <string name="settings_slider_max_45">45 Mbps</string>
+    <string name="settings_slider_min_100m">100 m</string>
+    <string name="settings_slider_max_2000m">2 000 m</string>
+
+    <!-- Color legend -->
+    <string name="settings_legend_fast">Fast (&gt;threshold)</string>
+    <string name="settings_legend_moderate">Moderate</string>
+    <string name="settings_legend_slow">Slow (&lt;threshold)</string>
+
+    <!-- Speed unit toggle -->
+    <string name="settings_unit_mbps">Mbps</string>
+    <string name="settings_unit_mbytes">MB/s</string>
+</resources>
